@@ -7,18 +7,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Getter
 @Setter
 public class User {
+    public User() {
+    }
+
+    public User(String id, String name, String password) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+    }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-
+    @Column(columnDefinition = "VARCHAR(30)")
     private String name;
-
+    @Column(columnDefinition = "VARCHAR(30)")
     private String password;
 
 
