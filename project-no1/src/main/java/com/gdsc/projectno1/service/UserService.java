@@ -30,19 +30,23 @@ public class UserService {
 
     }
 
-    public User signUp(UserDto userDto){                        //회원 가입
-        if((userRepository.findByNameAndPassword(userDto.getName(), userDto.getPassword())) == null){
-            throw new IllegalArgumentException("This id is already used");
+
+    public void signUp(UserDto userDto){                        // 회원 가입
+        if((userRepository.findByName(userDto.getName())) != null){
+            throw new IllegalArgumentException("This name is already used");
         }
         User user = new User(UUID.randomUUID().toString(),
                 userDto.getName(),
                 userDto.getPassword());
-        return userRepository.save(user);
+                userRepository.save(user);
     }
 
     public List<User> showAllUsers(){
 
         return userRepository.findAll();
+    }
+    public void deleteAll(){
+        userRepository.deleteAll();
     }
 
 }
